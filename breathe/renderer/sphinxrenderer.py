@@ -249,6 +249,7 @@ class DomainDirectiveFactory:
             'namespace': (CSharpObject, 'type'),
             'attribute': (CSharpAttribute, 'attribute'),
             'typedef': (CPPTypeObject, 'type'),
+            'event': (CSharpObject, 'event'),
         }
 
     @staticmethod
