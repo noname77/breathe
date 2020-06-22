@@ -19,6 +19,11 @@ try:
 except ImportError:
     php = None
 
+try:
+    from sphinx_csharp import csharp as cs
+except ImportError:
+    cs = None
+
 import re
 import six
 import textwrap
@@ -142,6 +147,45 @@ class PyClasslike(BaseObject, python.PyClasslike):
 
 # ----------------------------------------------------------------------------
 
+class CSharpObject(BaseObject, cs.CSharpObject):
+    pass
+
+class CSharpProperty(BaseObject, cs.CSharpProperty):
+    pass
+
+class CSharpClass(BaseObject, cs.CSharpClass):
+    pass
+
+class CSharpMethod(BaseObject, cs.CSharpMethod):
+    pass
+
+class CSharpEnum(BaseObject, cs.CSharpEnum):
+    pass
+
+class CSharpEnumValue(BaseObject, cs.CSharpEnumValue):
+    pass
+
+class CSharpCurrentNamespace(BaseObject, cs.CSharpCurrentNamespace):
+    pass
+
+class CSharpAttribute(BaseObject, cs.CSharpAttribute):
+    pass
+
+class CSharpIndexer(BaseObject, cs.CSharpIndexer):
+    pass
+
+class CSharpXRefRole(BaseObject, cs.CSharpXRefRole):
+    pass
+
+class CSharpDomain(BaseObject, cs.CSharpDomain):
+    pass
+
+class CSharpInherits(BaseObject, cs.CSharpInherits):
+    pass
+
+
+# ----------------------------------------------------------------------------
+
 class DomainDirectiveFactory:
     # A mapping from node kinds to domain directives and their names.
     cpp_classes = {
@@ -191,6 +235,22 @@ class DomainDirectiveFactory:
             'global': (php.PhpGloballevel, 'global'),
         }
 
+    if cs is not None:
+        cs_classes = {
+        'variable': (CSharpObject, 'var'),
+        'property': (CSharpObject, 'property'),
+        'class': (CSharpClass, 'class'),
+        'struct': (CSharpClass, 'struct'),
+        'interface': (CSharpClass, 'interface'),
+        'function': (CSharpMethod, 'function'),
+        'method': (CSharpMethod, 'method'),
+        'enum': (CSharpEnum, 'enum'),
+        'enumvalue': (CSharpEnumValue, 'enumerator'),
+        'namespace': (CSharpObject, 'type'),
+        'attribute': (CSharpAttribute, 'attribute'),
+        'typedef': (CPPTypeObject, 'type'),
+        }
+
     @staticmethod
     def create(domain: str, args) -> ObjectDescription:
         cls = cast(Type[ObjectDescription], None)
@@ -214,6 +274,8 @@ class DomainDirectiveFactory:
                     arg_0 = 'global'
             cls, name = DomainDirectiveFactory.php_classes.get(
                 arg_0, (php.PhpClasslike, 'class'))
+        elif cs is not None and domain == 'cs':
+            cls, name = DomainDirectiveFactory.cs_classes[args[0]]
         else:
             domain = 'cpp'
             cls, name = DomainDirectiveFactory.cpp_classes[args[0]]  # type: ignore
@@ -471,7 +533,7 @@ class SphinxRenderer:
         else:
             declarator = sig
         assert declarator is not None
-        if display_obj_type is not None:
+        if display_obj_type is not None and isinstance(declarator[0], addnodes.desc_annotation):
             n = declarator[0]
             assert isinstance(n, addnodes.desc_annotation)
             assert n.astext()[-1] == " "
@@ -827,11 +889,11 @@ class SphinxRenderer:
             return self.visit_union(node)
         elif kind in ('struct', 'class', 'interface'):
             dom = self.get_domain()
-            if not dom or dom in ('c', 'cpp', 'py'):
+            if not dom or dom in ('c', 'cpp', 'py', 'cs'):
                 return self.visit_class(node)
         elif kind == 'namespace':
             dom = self.get_domain()
-            if not dom or dom in ('c', 'cpp', 'py'):
+            if not dom or dom in ('c', 'cpp', 'py', 'cs'):
                 return self.visit_namespace(node)
 
         self.context = cast(RenderContext, self.context)
@@ -1344,7 +1406,7 @@ class SphinxRenderer:
 
     def visit_function(self, node) -> List[Node]:
         dom = self.get_domain()
-        if not dom or dom in ('c', 'cpp', 'py'):
+        if not dom or dom in ('c', 'cpp', 'py', 'cs'):
             names = self.get_qualification()
             names.append(node.get_name())
             name = self.join_nested_name(names)
@@ -1502,7 +1564,7 @@ class SphinxRenderer:
                 node.get_argsstring(),
                 self.make_initializer(node)
             ])
-        if not dom or dom in ('c', 'cpp', 'py'):
+        if not dom or dom in ('c', 'cpp', 'py', 'cs'):
             return self.handle_declaration(node, declaration, options=options)
         else:
             return self.render_declaration(node, declaration)
