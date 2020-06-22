@@ -237,18 +237,18 @@ class DomainDirectiveFactory:
 
     if cs is not None:
         cs_classes = {
-        'variable': (CSharpObject, 'var'),
-        'property': (CSharpObject, 'property'),
-        'class': (CSharpClass, 'class'),
-        'struct': (CSharpClass, 'struct'),
-        'interface': (CSharpClass, 'interface'),
-        'function': (CSharpMethod, 'function'),
-        'method': (CSharpMethod, 'method'),
-        'enum': (CSharpEnum, 'enum'),
-        'enumvalue': (CSharpEnumValue, 'enumerator'),
-        'namespace': (CSharpObject, 'type'),
-        'attribute': (CSharpAttribute, 'attribute'),
-        'typedef': (CPPTypeObject, 'type'),
+            'variable': (CSharpObject, 'var'),
+            'property': (CSharpObject, 'property'),
+            'class': (CSharpClass, 'class'),
+            'struct': (CSharpClass, 'struct'),
+            'interface': (CSharpClass, 'interface'),
+            'function': (CSharpMethod, 'function'),
+            'method': (CSharpMethod, 'method'),
+            'enum': (CSharpEnum, 'enum'),
+            'enumvalue': (CSharpEnumValue, 'enumerator'),
+            'namespace': (CSharpObject, 'type'),
+            'attribute': (CSharpAttribute, 'attribute'),
+            'typedef': (CPPTypeObject, 'type'),
         }
 
     @staticmethod
@@ -1000,8 +1000,8 @@ class SphinxRenderer:
         ("public-slot", "Public Slots"),
         ("signal", "Signals"),
         ("dcop-func", "DCOP Function"),
-        ("property", "Property"),
-        ("event", "Event"),
+        ("property", "Properties"),
+        ("event", "Events"),
         ("public-static-func", "Public Static Functions"),
         ("public-static-attrib", "Public Static Attributes"),
         ("protected-type", "Protected Types"),
