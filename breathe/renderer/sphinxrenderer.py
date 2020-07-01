@@ -1798,5 +1798,3 @@ def setup(app: Sphinx) -> None:
     app.add_config_value('breathe_debug_trace_directives', False, '')
     app.add_config_value('breathe_debug_trace_doxygen_ids', False, '')
     app.add_config_value('breathe_debug_trace_qualification', False, '')
-    if cs is not None:
-        cs.setup(app)
