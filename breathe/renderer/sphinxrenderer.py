@@ -157,6 +157,9 @@ if cs is not None:
     class CSharpClass(BaseObject, cs.CSharpClass):
         pass
 
+    class CSharpStruct(BaseObject, cs.CSharpStruct):
+        pass
+
     class CSharpMethod(BaseObject, cs.CSharpMethod):
         pass
 
@@ -241,7 +244,7 @@ class DomainDirectiveFactory:
             'variable': (CSharpObject, 'var'),
             'property': (CSharpObject, 'property'),
             'class': (CSharpClass, 'class'),
-            'struct': (CSharpClass, 'struct'),
+            'struct': (CSharpStruct, 'struct'),
             'interface': (CSharpClass, 'interface'),
             'function': (CSharpMethod, 'function'),
             'method': (CSharpMethod, 'method'),
