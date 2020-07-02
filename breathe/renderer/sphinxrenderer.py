@@ -1722,6 +1722,8 @@ class SphinxRenderer:
             return self.visit_typedef(node)
         if node.kind == "variable":
             return self.visit_variable(node)
+        if node.kind == "property":
+            return self.visit_variable(node)
         if node.kind == "define":
             return self.visit_define(node)
         if node.kind == "friend":
