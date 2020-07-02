@@ -242,16 +242,16 @@ class DomainDirectiveFactory:
     if cs is not None:
         cs_classes = {
             'variable': (CSharpObject, 'var'),
-            'property': (CSharpObject, 'property'),
+            'property': (CSharpProperty, 'property'),
             'class': (CSharpClass, 'class'),
             'struct': (CSharpStruct, 'struct'),
             'interface': (CSharpClass, 'interface'),
             'function': (CSharpMethod, 'function'),
-            'method': (CSharpMethod, 'method'),
+            'method': (CSharpMethod, 'function'),
             'enum': (CSharpEnum, 'enum'),
             'enumvalue': (CSharpEnumValue, 'enumerator'),
-            'namespace': (CSharpObject, 'type'),
-            'attribute': (CSharpAttribute, 'attribute'),
+            'namespace': (CSharpCurrentNamespace, 'namespace'),
+            'attribute': (CSharpAttribute, 'attr'),
             'typedef': (CPPTypeObject, 'type'),
             'event': (CSharpObject, 'event'),
         }
