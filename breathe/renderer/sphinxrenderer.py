@@ -284,7 +284,7 @@ class DomainDirectiveFactory:
                 arg_0, (php.PhpClasslike, 'class'))
         elif cs is not None and domain == 'cs':
             cls, name = DomainDirectiveFactory.cs_classes[args[0]]
-            print(f"cs: args[0] = {args[0]}, args[1:] = {args[1:]}, cls = {cls}, name = {name}")
+            print(f"cs: {args[0]}, args: {args[1]}")
         else:
             domain = 'cpp'
             cls, name = DomainDirectiveFactory.cpp_classes[args[0]]  # type: ignore
