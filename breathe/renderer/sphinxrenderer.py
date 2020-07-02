@@ -151,6 +151,9 @@ if cs is not None:
     class CSharpObject(BaseObject, cs.CSharpObject):
         pass
 
+    class CSharpVariable(BaseObject, cs.CSharpVariable):
+        pass
+
     class CSharpProperty(BaseObject, cs.CSharpProperty):
         pass
 
@@ -241,7 +244,7 @@ class DomainDirectiveFactory:
 
     if cs is not None:
         cs_classes = {
-            'variable': (CSharpObject, 'var'),
+            'variable': (CSharpVariable, 'var'),
             'property': (CSharpProperty, 'property'),
             'class': (CSharpClass, 'class'),
             'struct': (CSharpStruct, 'struct'),
@@ -280,8 +283,8 @@ class DomainDirectiveFactory:
             cls, name = DomainDirectiveFactory.php_classes.get(
                 arg_0, (php.PhpClasslike, 'class'))
         elif cs is not None and domain == 'cs':
-            print(f"In cs domain! args[0] = {args[0]}, args[1:] = {args[1:]}")
             cls, name = DomainDirectiveFactory.cs_classes[args[0]]
+            print(f"cs: args[0] = {args[0]}, args[1:] = {args[1:]}, cls = {cls}, name = {name}")
         else:
             domain = 'cpp'
             cls, name = DomainDirectiveFactory.cpp_classes[args[0]]  # type: ignore
