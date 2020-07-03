@@ -157,10 +157,16 @@ if cs is not None:
     class CSharpProperty(BaseObject, cs.CSharpProperty):
         pass
 
+    class CSharpEvent(BaseObject, cs.CSharpEvent):
+        pass
+
     class CSharpClass(BaseObject, cs.CSharpClass):
         pass
 
     class CSharpStruct(BaseObject, cs.CSharpStruct):
+        pass
+
+    class CSharpInterface(BaseObject, cs.CSharpInterface):
         pass
 
     class CSharpMethod(BaseObject, cs.CSharpMethod):
@@ -244,19 +250,25 @@ class DomainDirectiveFactory:
 
     if cs is not None:
         cs_classes = {
-            'variable': (CSharpVariable, 'var'),
-            'property': (CSharpProperty, 'property'),
+            # 'doxygen-name': (CSharp class, key in object_types)
+            'namespace': (CSharpCurrentNamespace, 'namespace'),
+
             'class': (CSharpClass, 'class'),
             'struct': (CSharpStruct, 'struct'),
-            'interface': (CSharpClass, 'interface'),
+            'interface': (CSharpInterface, 'interface'),
+
             'function': (CSharpMethod, 'function'),
-            'method': (CSharpMethod, 'function'),
+            'method': (CSharpMethod, 'method'),
+
+            'variable': (CSharpVariable, 'var'),
+            'property': (CSharpProperty, 'property'),
+            'event': (CSharpEvent, 'event'),
+
             'enum': (CSharpEnum, 'enum'),
             'enumvalue': (CSharpEnumValue, 'enumerator'),
-            'namespace': (CSharpCurrentNamespace, 'namespace'),
             'attribute': (CSharpAttribute, 'attr'),
+
             'typedef': (CPPTypeObject, 'type'),
-            'event': (CSharpObject, 'event'),
         }
 
     @staticmethod
