@@ -251,7 +251,7 @@ class DomainDirectiveFactory:
     if cs is not None:
         cs_classes = {
             # 'doxygen-name': (CSharp class, key in object_types)
-            'namespace': (CSharpCurrentNamespace, 'namespace'),
+            'namespace': (CSharpObject, 'namespace'),
 
             'class': (CSharpClass, 'class'),
             'struct': (CSharpStruct, 'struct'),
