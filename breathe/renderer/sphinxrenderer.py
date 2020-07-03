@@ -1735,6 +1735,10 @@ class SphinxRenderer:
         if node.kind == "variable":
             return self.visit_variable(node)
         if node.kind == "property":
+            # Note: visit like variable for now
+            return self.visit_variable(node)
+        if node.kind == "event":
+            # Note: visit like variable for now
             return self.visit_variable(node)
         if node.kind == "define":
             return self.visit_define(node)
