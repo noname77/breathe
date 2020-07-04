@@ -296,7 +296,6 @@ class DomainDirectiveFactory:
                 arg_0, (php.PhpClasslike, 'class'))
         elif cs is not None and domain == 'cs':
             cls, name = DomainDirectiveFactory.cs_classes[args[0]]
-            print(f"cs: {args[0]}, args: {args[1]}")
         else:
             domain = 'cpp'
             cls, name = DomainDirectiveFactory.cpp_classes[args[0]]  # type: ignore
@@ -473,8 +472,6 @@ class SphinxRenderer:
         self.context = cast(RenderContext, self.context)
         args = [obj_type, [declaration]] + self.context.directive_args[2:]
         directive = DomainDirectiveFactory.create(self.context.domain, args)
-        if not issubclass(type(directive), BaseObject):
-            print(f"directive: {directive} is not a subclass of {BaseObject}")
         assert issubclass(type(directive), BaseObject)
         directive.breathe_content_callback = contentCallback  # type: ignore
 
@@ -558,8 +555,6 @@ class SphinxRenderer:
         assert declarator is not None
         if display_obj_type is not None and isinstance(declarator[0], addnodes.desc_annotation):
             n = declarator[0]
-            if not isinstance(n, addnodes.desc_annotation):
-                print(f"{n} of type {type(n)} is not an instance of {addnodes.desc_annotation}, declarator = {declarator}")
             assert isinstance(n, addnodes.desc_annotation)
             assert n.astext()[-1] == " "
             txt = display_obj_type + ' '
@@ -593,7 +588,7 @@ class SphinxRenderer:
                     print("{}{}".format(_debug_indent * '  ', 'res='))
                 return []
             if (node.node_type == 'compound' and
-                node.kind not in ['file', 'namespace', 'group']) or \
+                    node.kind not in ['file', 'namespace', 'group']) or \
                     node.node_type == 'memberdef':
                 # We skip the 'file' entries because the file name doesn't form part of the
                 # qualified name for the identifier. We skip the 'namespace' entries because if we
@@ -633,7 +628,7 @@ class SphinxRenderer:
             if node.node_type == 'ref' and len(names) == 0:
                 return node.valueOf_
             if (node.node_type == 'compound' and
-                node.kind not in ['file', 'namespace', 'group']) or \
+                    node.kind not in ['file', 'namespace', 'group']) or \
                     node.node_type == 'memberdef':
                 # We skip the 'file' entries because the file name doesn't form part of the
                 # qualified name for the identifier. We skip the 'namespace' entries because if we
@@ -972,8 +967,8 @@ class SphinxRenderer:
             # Pretend that the signature is being rendered in context of the
             # definition, for proper domain detection
             nodes, contentnode = render_sig(
-                file_data, self.target_handler.create_target(refid),
-                name, kind)
+                    file_data, self.target_handler.create_target(refid),
+                    name, kind)
 
         if file_data.compounddef.includes:
             for include in file_data.compounddef.includes:
