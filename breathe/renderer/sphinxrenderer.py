@@ -181,6 +181,9 @@ if cs is not None:
     class CSharpCurrentNamespace(BaseObject, cs.CSharpCurrentNamespace):
         pass
 
+    class CSharpNamespacePlain(BaseObject, cs.CSharpNamespacePlain):
+        pass
+
     class CSharpAttribute(BaseObject, cs.CSharpAttribute):
         pass
 
@@ -250,8 +253,8 @@ class DomainDirectiveFactory:
 
     if cs is not None:
         cs_classes = {
-            # 'doxygen-name': (CSharp class, key in object_types)
-            'namespace': (CSharpObject, 'namespace'),
+            # 'doxygen-name': (CSharp class, key in CSharpDomain.object_types)
+            'namespace': (CSharpNamespacePlain, 'namespace'),
 
             'class': (CSharpClass, 'class'),
             'struct': (CSharpStruct, 'struct'),
@@ -268,6 +271,7 @@ class DomainDirectiveFactory:
             'enumvalue': (CSharpEnumValue, 'enumerator'),
             'attribute': (CSharpAttribute, 'attr'),
 
+            # Fallback to cpp domain
             'typedef': (CPPTypeObject, 'type'),
         }
 
@@ -553,7 +557,7 @@ class SphinxRenderer:
         else:
             declarator = sig
         assert declarator is not None
-        if display_obj_type is not None and isinstance(declarator[0], addnodes.desc_annotation):
+        if display_obj_type is not None:
             n = declarator[0]
             assert isinstance(n, addnodes.desc_annotation)
             assert n.astext()[-1] == " "
