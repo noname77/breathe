@@ -148,16 +148,10 @@ class PyClasslike(BaseObject, python.PyClasslike):
 # ----------------------------------------------------------------------------
 
 if cs is not None:
-    class CSharpObject(BaseObject, cs.CSharpObject):
+    class CSharpCurrentNamespace(BaseObject, cs.CSharpCurrentNamespace):
         pass
 
-    class CSharpVariable(BaseObject, cs.CSharpVariable):
-        pass
-
-    class CSharpProperty(BaseObject, cs.CSharpProperty):
-        pass
-
-    class CSharpEvent(BaseObject, cs.CSharpEvent):
+    class CSharpNamespacePlain(BaseObject, cs.CSharpNamespacePlain):
         pass
 
     class CSharpClass(BaseObject, cs.CSharpClass):
@@ -169,19 +163,25 @@ if cs is not None:
     class CSharpInterface(BaseObject, cs.CSharpInterface):
         pass
 
+    class CSharpInherits(BaseObject, cs.CSharpInherits):
+        pass
+
     class CSharpMethod(BaseObject, cs.CSharpMethod):
+        pass
+
+    class CSharpVariable(BaseObject, cs.CSharpVariable):
+        pass
+
+    class CSharpProperty(BaseObject, cs.CSharpProperty):
+        pass
+
+    class CSharpEvent(BaseObject, cs.CSharpEvent):
         pass
 
     class CSharpEnum(BaseObject, cs.CSharpEnum):
         pass
 
     class CSharpEnumValue(BaseObject, cs.CSharpEnumValue):
-        pass
-
-    class CSharpCurrentNamespace(BaseObject, cs.CSharpCurrentNamespace):
-        pass
-
-    class CSharpNamespacePlain(BaseObject, cs.CSharpNamespacePlain):
         pass
 
     class CSharpAttribute(BaseObject, cs.CSharpAttribute):
@@ -191,12 +191,6 @@ if cs is not None:
         pass
 
     class CSharpXRefRole(BaseObject, cs.CSharpXRefRole):
-        pass
-
-    class CSharpDomain(BaseObject, cs.CSharpDomain):
-        pass
-
-    class CSharpInherits(BaseObject, cs.CSharpInherits):
         pass
 
 
