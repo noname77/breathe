@@ -8,14 +8,14 @@ except ImportError:
 
 import sys
 
-version = '4.19.2'
+import breathe
 
 long_desc = '''
 Breathe is an extension to reStructuredText and Sphinx to be able to read and
  render `Doxygen <http://www.doxygen.org>`__ xml output.
 '''
 
-requires = ['Sphinx>=3.0,<3.2', 'docutils>=0.12', 'six>=1.9', 'sphinx-csharp']
+requires = ['Sphinx>=3.0,<3.2', 'docutils>=0.12', 'six>=1.9']
 
 if sys.version_info < (3, 5):
     print('ERROR: Sphinx requires at least Python 3.5 to run.')
@@ -24,7 +24,7 @@ if sys.version_info < (3, 5):
 
 setup(
     name='breathe',
-    version=version,
+    version=breathe.__version__,
     url='https://github.com/michaeljones/breathe',
     download_url='https://github.com/michaeljones/breathe',
     license='BSD',
