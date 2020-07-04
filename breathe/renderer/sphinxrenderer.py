@@ -20,7 +20,7 @@ except ImportError:
     php = None
 
 try:
-    from sphinx_csharp import csharp as cs
+    from sphinx_csharp import csharp as cs  # type: ignore
 except ImportError:
     cs = None
 
@@ -293,7 +293,7 @@ class DomainDirectiveFactory:
             cls, name = DomainDirectiveFactory.php_classes.get(
                 arg_0, (php.PhpClasslike, 'class'))
         elif cs is not None and domain == 'cs':
-            cls, name = DomainDirectiveFactory.cs_classes[args[0]]
+            cls, name = DomainDirectiveFactory.cs_classes[args[0]]  # type: ignore
         else:
             domain = 'cpp'
             cls, name = DomainDirectiveFactory.cpp_classes[args[0]]  # type: ignore
