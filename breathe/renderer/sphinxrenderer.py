@@ -1143,15 +1143,16 @@ class SphinxRenderer:
         nodelist.extend(self.render_iterable(node.para))
 
         refid = self.get_refid(node.refid)
+        is_code_domain = self.context.domain in ['py', 'cpp', 'php', 'cs']
 
         nodelist = [
             addnodes.pending_xref(
                 "",
-                reftype="ref",
-                refdomain="std",
+                reftype='type' if is_code_domain else "ref",
+                refdomain=self.context.domain if is_code_domain else "std",
                 refexplicit=True,
-                refid=refid,
-                reftarget=refid,
+                refid=nodelist[0].line if is_code_domain else refid,
+                reftarget=nodelist[0].line if is_code_domain else refid,
                 *nodelist
             )
         ]
