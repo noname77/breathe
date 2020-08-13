@@ -1148,7 +1148,7 @@ class SphinxRenderer:
         nodelist = [
             addnodes.pending_xref(
                 "",
-                reftype='type' if is_code_domain else "ref",
+                reftype="ref",
                 refdomain=self.context.domain if is_code_domain else "std",
                 refexplicit=True,
                 refid=nodelist[0].line if is_code_domain else refid,
